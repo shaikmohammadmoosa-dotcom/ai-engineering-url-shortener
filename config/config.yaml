@@ -1,0 +1,22 @@
+app:
+  name: "AI-Shortener"
+  version: "1.0.0"
+  environment: "development"
+  base_url: "http://localhost:8000"
+
+server:
+  host: "0.0.0.0"
+  port: 8000
+
+database:
+  sqlite_url: "sqlite:///./url_shortener.db"
+  redis_host: "localhost"
+  redis_port: 6379
+  redis_db: 0
+
+shortener:
+  default_ttl_days: 30
+  code_length: 7
+
+rate_limit:
+  requests_per_minute: 60
