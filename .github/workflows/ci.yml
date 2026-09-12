@@ -33,5 +33,7 @@ jobs:
           mypy app || true
 
       - name: Run Pytest with Coverage
+        env:
+          PYTHONPATH: .
         run: |
-          pytest --cov=app --cov-report=term-missing tests/
+          python -m pytest --cov=app --cov-report=term-missing tests/
