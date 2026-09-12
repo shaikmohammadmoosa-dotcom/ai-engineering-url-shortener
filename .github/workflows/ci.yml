@@ -1,5 +1,5 @@
-```yaml
 name: CI Quality Gate & Test Runner
+
 on:
   push:
     branches: [ main, master ]
