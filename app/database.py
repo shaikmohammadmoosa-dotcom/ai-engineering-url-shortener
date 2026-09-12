@@ -1,6 +1,6 @@
 import sqlite3
 from typing import Optional, Dict, Any
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 class Database:
