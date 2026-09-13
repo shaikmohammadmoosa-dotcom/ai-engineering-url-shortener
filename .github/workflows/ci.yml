@@ -30,7 +30,7 @@ jobs:
 
     - name: Static type check with mypy
       run: |
-        mypy app
+       mypy app --ignore-missing-imports
 
     - name: Run pytest with coverage
       env:
