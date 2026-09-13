@@ -1,4 +1,4 @@
-name: CI Workflow - FastAPI URL Shortener
+name: Production Quality Gate & Automated Test Suite
 
 on:
   push:
@@ -30,10 +30,19 @@ jobs:
 
     - name: Static type check with mypy
       run: |
-       mypy app --ignore-missing-imports
+        mypy app --ignore-missing-imports
 
-    - name: Run pytest with coverage
+    - name: Run pytest & generate HTML report
       env:
         PYTHONPATH: .
       run: |
-        pytest --cov=app tests/
+        pytest --cov=app --cov-report=html:htmlcov --html=report.html --self-contained-html tests/
+
+    - name: Upload Test & Coverage HTML Artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-and-coverage-report
+        path: |
+          report.html
+          htmlcov/
