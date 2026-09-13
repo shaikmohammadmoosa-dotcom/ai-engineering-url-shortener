@@ -1,11 +1,11 @@
+```yaml
 name: CI Quality Gate & Test Runner
-
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-
+workflow_dispatch:
 jobs:
   test-and-lint:
     runs-on: ubuntu-latest
@@ -33,7 +33,5 @@ jobs:
           mypy app || true
 
       - name: Run Pytest with Coverage
-        env:
-          PYTHONPATH: .
         run: |
-          python -m pytest --cov=app --cov-report=term-missing tests/
+          pytest --cov=app --cov-report=term-missing tests/
