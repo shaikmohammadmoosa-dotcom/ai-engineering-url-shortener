@@ -61,3 +61,6 @@ Execution Logs & AI Traceability
   * Replaced deprecated `datetime.utcnow()` with `datetime.now(timezone.utc)`.
   * Configured `PYTHONPATH: .` inside `.github/workflows/ci.yml`.
   * Added `--max-line-length=120` to `flake8` execution in CI runner.
+  ### Automated Testing & Reporting
+* **Test Suite:** Pytest coverage across all core endpoints (`/shorten`, `/{short_code}`, `/analytics/{short_code}`).
+* **Visual Artifacts:** Every CI run automatically generates and uploads an interactive **HTML Test & Coverage Report** (`report.html`), accessible directly under the GitHub Actions run summary.
