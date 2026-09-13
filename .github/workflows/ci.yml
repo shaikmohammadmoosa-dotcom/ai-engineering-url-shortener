@@ -1,37 +1,39 @@
-```yaml
 name: CI Quality Gate & Test Runner
+
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-workflow_dispatch:
+  workflow_dispatch:
+
 jobs:
-  test-and-lint:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
 
-      - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-      - name: Code Linting
-        run: |
-          flake8 app --max-line-length=88 || true
+    - name: Lint with flake8
+      run: |
+        flake8 app tests
 
-      - name: Static Type Checking
-        run: |
-          mypy app || true
+    - name: Static type check with mypy
+      run: |
+        mypy app
 
-      - name: Run Pytest with Coverage
-        run: |
-          pytest --cov=app --cov-report=term-missing tests/
+    - name: Run pytest with coverage
+      env:
+        PYTHONPATH: .
+      run: |
+        pytest --cov=app tests/
