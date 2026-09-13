@@ -1,4 +1,4 @@
-name: CI Quality Gate & Test Runner
+name: CI Workflow - FastAPI URL Shortener
 
 on:
   push:
